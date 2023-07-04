@@ -17,6 +17,9 @@ a {
     width: 250px;
     height: 100vh;
     padding-top: calc(90/18)+em;
+    position: fixed;
+    top: 0;
+    left: 0;
 
     &__title {
         background-color: aquamarine;
@@ -34,7 +37,6 @@ a {
         text-orientation: upright;
         margin: auto;
         padding: 0;
-
     }
 
     &__item {
@@ -46,5 +48,4 @@ a {
             line-height: 1;
         }
     }
-
 }
