@@ -1,1 +1,50 @@
 @charset "utf-8";
+
+@mixin rem ($s) {
+    font-size: calc($s/18)+rem;
+}
+
+
+html {
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header {
+    width: 250px;
+    height: 100vh;
+    padding-top: calc(90/18)+em;
+
+    &__title {
+        background-color: aquamarine;
+        width: 192px;
+        height: 395px;
+        margin: auto;
+        margin-bottom: calc(90/18)+em;
+    }
+}
+
+.nav {
+    &__list {
+        list-style: none;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        margin: auto;
+        padding: 0;
+
+    }
+
+    &__item {
+        margin: 0 calc(15/18)+em;
+        font-family: YuMincho, serif;
+
+        a {
+            @include rem(15);
+            line-height: 1;
+        }
+    }
+
+}
