@@ -1,7 +1,7 @@
 @charset "utf-8";
 @charset "utf-8";
-$color-text:#242424;
-$color-text-sub:#FFFFFF;
+$text-color:#242424;
+$sub-color:#fff;
 
 @mixin rem ($s) {
     font-size: calc($s/18)+rem;
@@ -12,21 +12,35 @@ $color-text-sub:#FFFFFF;
 
 }
 
-@mixin flex($a,$j){
-    display:flex;
-    align-items:$a;
-    justify-content:$j;
-    flex-wrap:wrap;
+@mixin flex($a, $j) {
+    display: flex;
+    align-items: $a;
+    justify-content: $j;
+    flex-wrap: wrap;
 }
+
+@mixin media() {
+    @media (max-width:765px) {
+        @content
+    }
+}
+
 html {
     font-size: 18px;
+
+    @include media() {
+        font-size: 16px;
+    }
 }
-body{
-    font-family :
-	YuMincho,
-	'Yu Mincho',
-	serif;
+
+body {
+    color: $text-color;
+    font-family:
+        YuMincho,
+        'Yu Mincho',
+        serif;
 }
+
 a {
     text-decoration: none;
 }
@@ -36,17 +50,16 @@ a {
     width: 250px;
     height: 100vh;
     padding-top: calc(90/18)+em;
-    background: #ffffff;
+    background: $sub-color;
     position: fixed;
     top: 0;
     left: 0;
 
     &__title {
-        background-color: aquamarine;
         width: 192px;
         height: 395px;
         margin: auto;
-        margin-bottom: calc(90/18)+em;
+        margin-bottom: calc(70/18)+em;
     }
 }
 
@@ -66,7 +79,7 @@ a {
         font-family: YuMincho, serif;
 
         a {
-            @include rem(15);
+            @include rem(17);
             line-height: 1;
         }
     }
@@ -87,24 +100,87 @@ a {
 }
 
 // introduction
-.introduction{
-background: url(../images/bg_festival.jpg) no-repeat center center/cover;
-color: #fff;
-padding: calc(100/18)+em;
+.introduction {
+    background: url(../images/bg_festival.jpg) no-repeat center center/cover;
+    color: $sub-color;
+    padding: calc(150/18)+em 0;
 
-&__textarea{
-    @include flex(flex-start,center);
-    height:24em;
-    flex-direction: row-reverse;
+
+    &__textarea {
+        @include flex(flex-start, center);
+        height: 20em;
+        flex-direction: row-reverse;
+    }
+
+    &__title {
+        writing-mode: vertical-rl;
+        @include rem(25);
+        font-weight: normal;
+
+        &::after {
+            content: "";
+            display: block;
+            width: 1px;
+            height: 80%;
+            background: $sub-color;
+            margin-right: calc(15/22)+em;
+        }
+    }
+
+    &__paragraph {
+        writing-mode: vertical-rl;
+        @include rem(18);
+        margin-right: calc(50/18)+em;
+        line-height: 2em;
+    }
 }
-&__title{
-    writing-mode:vertical-rl;
-    @include rem(24);
-}
-&__paragraph{
-    writing-mode:vertical-rl;
-    @include rem(18);
-    margin-right: calc(50/18)+em;
-    line-height: 2em;
-}
+
+// instagram
+.instagram {
+    padding-top: calc(125/18)+em;
+    padding-bottom: calc(100/18)+em;
+    font-family: "Helvetica Neue",
+        Arial,
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
+    background: url(../images/bg_instagram.jpg) no-repeat right calc(76/18)+em/60%;
+
+    &__photo-area {
+        @include flex(flex-start, flex-start);
+    }
+
+    &__title {
+        @include rem(45);
+        font-weight: normal;
+        letter-spacing: .1em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        transform: translateX(-10%);
+        line-height: 1;
+        margin-bottom: calc(5/45)+em;
+    }
+
+    &__tag {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        transform: translateX(15%);
+        letter-spacing: .1em;
+        margin-bottom: calc(15/18)+em;
+
+        a {
+            color: $text-color;
+
+            &::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 1px;
+                background: $text-color;
+            }
+        }
+    }
 }
