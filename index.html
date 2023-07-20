@@ -7,49 +7,139 @@
     <title>萩原チンドン祭り</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css">
-
+    <script>
+        (function (d) {
+            var config = {
+                    kitId: 'tyu3aaw',
+                    scriptTimeout: 3000,
+                    async: true
+                },
+                h = d.documentElement,
+                t = setTimeout(function () {
+                    h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+                }, config.scriptTimeout),
+                tk = d.createElement("script"),
+                f = false,
+                s = d.getElementsByTagName("script")[0],
+                a;
+            h.className += " wf-loading";
+            tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+            tk.async = true;
+            tk.onload = tk.onreadystatechange = function () {
+                a = this.readyState;
+                if (f || a && a != "complete" && a != "loaded") return;
+                f = true;
+                clearTimeout(t);
+                try {
+                    Typekit.load(config)
+                } catch (e) {}
+            };
+            s.parentNode.insertBefore(tk, s)
+        })(document);
+    </script>
 </head>
 
 <body>
-        <header class="header">
-            <h1 class="header__title">
-                <img src="./images/logo.png" alt="萩原チンドン祭り">
-            </h1>
-            <nav class="header__nav nav">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="">ホーム</a></li>
-                    <li class="nav__item"><a href="">チンドンの歴史</a></li>
-                    <li class="nav__item"><a href="">プロチンドン祭り</a></li>
-                    <li class="nav__item"><a href="">素人チンドン祭り</a></li>
-                </ul>
-            </nav>
-        </header>
-        <main class="main">
-            <section class="visual">
-            </section>
-            <section class="festival">
-                <article class="introduction">
-                    <div class="introduction__textarea">
+    <header class="header">
+        <h1 class="header__title">
+            <img src="./images/logo.png" alt="萩原チンドン祭り">
+        </h1>
+        <nav class="header__nav nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="">ホーム</a></li>
+                <li class="nav__item"><a href="">チンドンの歴史</a></li>
+                <li class="nav__item"><a href="">プロチンドン祭り</a></li>
+                <li class="nav__item"><a href="">素人チンドン祭り</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <section class="visual">
+        </section>
+        <section class="festival">
+            <article class="introduction">
+                <div class="introduction__textarea">
                     <h2 class="introduction__title">
                         萩原チンドン祭りの成り立ち
                     </h2>
                     <p class="introduction__paragraph">
-                        サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト
-                        サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+                        一宮萩原チンドン祭りは、明治時代から昭和初期にかけて行われ、商店街や町内を練り歩く形で行われました。この祭りは商売繁盛や地域の繁栄を願い、神輿やお囃子の演奏、パフォーマンスなどで地域の活気を盛り上げました。<br>
+                        萩原チンドン祭りの特徴は、起源が「萩原のカラクリさん」と呼ばれる豪商に関連していることです。彼は一宮市内で商売を営み、地域の発展に貢献しました。彼の宣伝と地域の活性化のため、カラクリさんはチンドンパフォーマンスを始めました。チンドンは楽器を演奏しながら町内を練り歩くスタイルのパフォーマンスで、人々の注目を集めました。地元の若者たちが集まり、祭りとして発展していきました。<br>
+                        現在の一宮萩原チンドン祭りは、地元のチンドン保存会や地域住民の協力で開催されます。祭りではチンドンパフォーマンスや神輿渡御、仮装行列などが行われ、地域の結束が感じられます
                     </p>
+                </div>
+            </article>
+            <article class="instagram">
+                <h1 class="instagram__title">
+                    Instagram
+                </h1>
+                <p class="instagram__tag">
+                    <a href="">#萩原チンドン祭り</a>
+                </p>
+                <div class="instagram__photo-area"></div>
+            </article>
+            <article class="festival__detail detail">
+                <div class="detail__content">
+                    <div class="detail__textarea">
+                        <h2 class="detail__title">
+                            <span class="detail__title-left">チンドン祭り</span><span class="detail__title-right">全国選抜</span>
+                        </h2>
+                        <p class="detail__paragraph">
+                            全国から選抜されたプロのパフォーマーたちが演出をするお祭りです。彼らは専門の団体に所属しております。プロの演出家として活動するチンドンマンは、演目や振り付けの制作、パフォーマンスの演出、チンドン屋の団体をまとめるリーダーシップなど、幅広いスキルを持っています。
+                        </p>
+                        <p class="detail__date">開催日：2023年5月28日(日)</p>
+                        <p class="detail__link">
+                            <a href="">詳細を見る<span class="detail__arrow">
+                                    <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                                        id="arrow-horizontal">
+                                        <path fill="#ffffff" transform="translate(30)"
+                                            d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                            data-name="Path 10" id="Path_10"></path>
+                                    </svg>
+                                </span>
+                            </a>
+                        </p>
                     </div>
-                </article>
-                <article class="instagram">
-                    <h1 class="instagram__title">
-                        Instagram
-                    </h1>
-                    <p class="instagram__tag">
-                        <a href="">#萩原チンドン祭り</a>
-                    </p>
-                    <div class="instagram__photo-area"></div>
-                </article>
-            </section>
-        </main>
-        <footer></footer>
-        <script src="./js/index.js"></script>
+                    <p class="detail__image"><img src="images/detail001.jpg" alt=""></p>
+                </div>
+            </article>
+            <article class="festival__detail detail">
+                <div class="detail__content detail__content--reverse">
+                    <div class="detail__textarea detail__textarea--red">
+                        <h2 class="detail__title">
+                            <span class="detail__title-left">チンドン祭り</span><span class="detail__title-right">素人</span>
+                        </h2>
+                        <p class="detail__paragraph">
+                            素人のチンドン屋さんは、プロのチンドン屋とは異なり、趣味や地域の活動として演出されることが多く、彼らは本職の演奏家ではなく、普段は別の仕事に従事していたり、地域の団体や友人同士で集まって楽しみながら活動しています。
+                        </p>
+                        <p class="detail__date">
+                            開催日：2023年5月28日
+                        </p>
+                        <p class="detail__link">
+                            <a href="">詳細を見る<span class="detail__arrow">
+                                    <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg"
+                                        id="arrow-horizontal">
+                                        <path fill="#ffffff" transform="translate(30)"
+                                            d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                            data-name="Path 10" id="Path_10"></path>
+                                    </svg>
+                                </span>
+                            </a>
+                        </p>
+                    </div>
+                    <p class="detail__image"><img src="images/detail001.jpg" alt=""></p>
+                </div>
+            </article>
+        </section>
+        <section class="history">
+            <div class="history__textarea">
+                <h2 class="history__title">
+                    <img src="./images/history-title.png" alt="チンドンの歴史">
+                </h2>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script src="./js/index.js"></script>
 </body>

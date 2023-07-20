@@ -5,8 +5,7 @@ const photoBox = [];
 
 for (let i = 0; i < 10; i++) {
     const img = document.createElement('img');
-    img.classList.add('instragram__photo');
-    img.style.width = `${(window.innerWidth - 250)/5}px`;
+    img.classList.add('instagram__photo');
     photoBox.push(img);
 }
 photoBox.forEach((photo) => {
