@@ -2,6 +2,7 @@
 @charset "utf-8";
 $text-color:#242424;
 $sub-color:#fff;
+$accent-color:#ffe1ce;
 
 @mixin rem ($s) {
     font-size: calc($s/18)+rem;
@@ -49,7 +50,7 @@ a {
 .header {
     width: 250px;
     height: 100vh;
-    padding-top: calc(90/18)+em;
+    padding-top: calc(70/18)+em;
     background: $sub-color;
     position: fixed;
     top: 0;
@@ -110,6 +111,7 @@ a {
         @include flex(flex-start, center);
         height: 20em;
         flex-direction: row-reverse;
+        min-width: 1200px;
     }
 
     &__title {
@@ -131,29 +133,34 @@ a {
         writing-mode: vertical-rl;
         @include rem(18);
         margin-right: calc(50/18)+em;
-        line-height: 2em;
+        letter-spacing: .1em;
+        line-height: 2.3em;
     }
 }
 
 // instagram
 .instagram {
-    padding-top: calc(125/18)+em;
-    padding-bottom: calc(100/18)+em;
+    margin-top: calc(85/18)+em;
+    margin-bottom: calc(85/18)+em;
+    padding-top: calc(40/18)+em;
+    padding-bottom: calc(40/18)+em;
     font-family: "Helvetica Neue",
         Arial,
         "Hiragino Kaku Gothic ProN",
         "Hiragino Sans",
         Meiryo,
         sans-serif;
-    background: url(../images/bg_instagram.jpg) no-repeat right calc(76/18)+em/60%;
+    background: linear-gradient(to right, $sub-color 40%, $accent-color 40%);
 
     &__photo-area {
         @include flex(flex-start, flex-start);
     }
 
     &__title {
-        @include rem(45);
-        font-weight: normal;
+        @include rem(40);
+        font-family: "tbudrgothic-std", sans-serif;
+        font-weight: 400;
+        font-style: normal;
         letter-spacing: .1em;
         display: flex;
         align-items: center;
@@ -181,6 +188,121 @@ a {
                 height: 1px;
                 background: $text-color;
             }
+        }
+    }
+
+    &__photo {
+        width: 20%;
+    }
+}
+
+// detail of festival
+.detail {
+    &__content {
+        @include flex(stretch, space-between);
+
+        &--reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
+    &__textarea {
+        padding: calc(60/18)+em calc(100/18)+em calc(60/18)+em  calc(60/18)+em;
+        width: 70%;
+        background: #23274F;
+        color: $sub-color;
+        @include flex(flex-start,center);
+        flex-direction: column;
+        &--red{
+            background: #740A00;
+        }
+    }
+
+    &__image {
+        width: 30%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__title {
+        @include rem(30);
+        margin-bottom: calc(40/30)+em;
+        font-family: "shippori-mincho", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: .1em;
+
+        &-left {
+            margin-right: calc(10/30)+em;
+        }
+
+        &-right {
+            padding-left: calc(10/30)+em;
+            border-left: 1px solid $sub-color;
+        }
+    }
+
+    &__paragraph {
+        margin-bottom: calc(45/18)+em;
+
+        &::after {
+            content: "";
+            display: block;
+            margin: auto;
+            margin-top: calc(60/18)+em;
+            height: 1px;
+            width: 50%;
+            background: #fff;
+        }
+    }
+&__date{
+    width: fit-content;
+    @include rem(22);
+            font-family: "shippori-mincho", sans-serif;
+    margin:0 auto calc(20/24)+em;
+}
+    &__link {
+        margin-left: auto;
+        a {
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            color: #fff;
+            @include rem(14);
+
+            &::after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 1px;
+                margin-top: (5/14)+em;
+                background: #fff;
+                transition: .3s;
+            }
+
+            &:hover {
+                &::after {
+                    width: 108%;
+                }
+
+                .detail__arrow {
+                    svg {
+                        transform: translateX(8px);
+                        transition: .3s;
+                    }
+                }
+            }
+        }
+    }
+
+    &__arrow {
+        svg {
+            transition: .3s;
+            transform: none;
         }
     }
 }
