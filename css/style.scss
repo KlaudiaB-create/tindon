@@ -1,16 +1,17 @@
 @charset "utf-8";
-@charset "utf-8";
 $text-color:#242424;
 $sub-color:#fff;
 $accent-color:#ffe1ce;
+$footer-color:#FF9553;
 
 @mixin rem ($s) {
     font-size: calc($s/18)+rem;
 }
 
 @mixin inner() {
-    margin-left: 250px;
-
+    margin: auto;
+    width: 90%;
+    max-width: 1200px;
 }
 
 @mixin flex($a, $j) {
@@ -20,8 +21,53 @@ $accent-color:#ffe1ce;
     flex-wrap: wrap;
 }
 
-@mixin media() {
-    @media (max-width:765px) {
+@mixin button($c:#242424) {
+    &__link {
+        margin-left: auto;
+
+        a {
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            color: $c;
+            @include rem(14);
+
+            &::after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 1px;
+                margin-top: calc(4/14)+em;
+                background: $c;
+                transition: .3s;
+            }
+
+            &:hover {
+                &::after {
+                    width: 105%;
+                }
+
+                .arrow {
+                    svg {
+                        transform: translateX(8px);
+                        transition: .3s;
+                    }
+                }
+            }
+        }
+    }
+
+    &__arrow {
+        svg {
+            transition: .3s;
+            transform: none;
+        }
+    }
+
+}
+
+@mixin media($p:760px) {
+    @media (max-width:$p) {
         @content
     }
 }
@@ -40,6 +86,11 @@ body {
         YuMincho,
         'Yu Mincho',
         serif;
+    line-height: 1.8;
+}
+
+ul {
+    list-style: none;
 }
 
 a {
@@ -50,17 +101,23 @@ a {
 .header {
     width: 250px;
     height: 100vh;
-    padding-top: calc(70/18)+em;
+    padding-top: calc(50/18)+em;
     background: $sub-color;
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 100;
 
     &__title {
+        @include rem(18);
         width: 192px;
         height: 395px;
         margin: auto;
         margin-bottom: calc(70/18)+em;
+    }
+
+    @include media(1250px) {
+        display: none;
     }
 }
 
@@ -68,29 +125,120 @@ a {
 .nav {
     &__list {
         list-style: none;
-        writing-mode: vertical-rl;
-        text-orientation: upright;
         margin: auto;
         padding: 0;
-
     }
 
     &__item {
-        margin: 0 calc(15/18)+em;
         font-family: YuMincho, serif;
 
+        &--fes {
+            text-align: center;
+            width: 100%;
+            cursor: pointer;
+            padding: calc(30/17)+em 0;
+            transition: .3s;
+            line-height: 1;
+
+            &:hover {
+                background: $accent-color;
+            }
+
+            &:after {
+                content: '';
+                display: block;
+
+            }
+        }
+
         a {
+            text-align: center;
+            width: 100%;
+            display: block;
             @include rem(17);
             line-height: 1;
+            padding: calc(30/17)+em 0;
+            color: $text-color;
+            transition: .3s;
+
+            &:hover {
+                background: $accent-color;
+            }
         }
     }
+}
 
+.mega-menu {
+    width: 250px;
+    height: 100vh;
+    background: url(../images/naviback.png) no-repeat bottom 15px left/100% $accent-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: .3s;
+    padding-top: calc(50/16)+em;
+
+    @include media(1250px) {
+        display: none;
+    }
+
+    &.active {
+        left: 250px;
+    }
+
+    &__title {
+        text-orientation: upright;
+        writing-mode: vertical-lr;
+        letter-spacing: .7em;
+        @include rem(20);
+        margin: 0 auto calc(50/20)+em;
+    }
+
+    &__list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    &__item {
+        text-align: right;
+        border-top: 1px solid $text-color;
+        transition: .3s;
+
+        &:last-child {
+            border-bottom: 1px solid $text-color;
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, .3)
+        }
+
+        a {
+            color: $text-color;
+            display: block;
+            padding: calc(25/18)+em calc(20/18)+em calc(25/18)+em 0;
+            letter-spacing: .1em;
+            line-height: 1;
+
+            span {
+                display: block;
+                margin-bottom: calc(10/14)+em;
+                @include rem(14);
+                line-height: 1;
+            }
+        }
+    }
 }
 
 // main content
 .main {
     overflow: hidden;
-    @include inner();
+    margin-left: 250px;
+
+    @include media(1250px) {
+        margin-left: 0;
+    }
 }
 
 // first view
@@ -105,19 +253,29 @@ a {
     background: url(../images/bg_festival.jpg) no-repeat center center/cover;
     color: $sub-color;
     padding: calc(150/18)+em 0;
+    @include media(1150px){
+        padding: calc(80/18)+em 0;
+    }
 
 
     &__textarea {
         @include flex(flex-start, center);
         height: 20em;
         flex-direction: row-reverse;
-        min-width: 1200px;
+        @include media(1150px){
+            height: auto;
+        }
     }
 
     &__title {
         writing-mode: vertical-rl;
         @include rem(25);
         font-weight: normal;
+
+        @include media(1150px) {
+            writing-mode: horizontal-tb;
+        }
+
 
         &::after {
             content: "";
@@ -126,6 +284,13 @@ a {
             height: 80%;
             background: $sub-color;
             margin-right: calc(15/22)+em;
+            @include media{
+                width: 100%;
+                height: 1px;
+                margin-right: 0;
+                margin-top: calc(10/25)+em;
+                margin-bottom: calc(20/25)+em;
+            }
         }
     }
 
@@ -135,6 +300,13 @@ a {
         margin-right: calc(50/18)+em;
         letter-spacing: .1em;
         line-height: 2.3em;
+
+        @include media(1150px) {
+            writing-mode: horizontal-tb;
+            margin: auto;
+            @include inner();
+        }
+
     }
 }
 
@@ -167,7 +339,7 @@ a {
         flex-direction: column;
         transform: translateX(-10%);
         line-height: 1;
-        margin-bottom: calc(5/45)+em;
+        margin-bottom: calc(5/40)+em;
     }
 
     &__tag {
@@ -201,25 +373,44 @@ a {
     &__content {
         @include flex(stretch, space-between);
 
+        @include media {
+            flex-direction: column-reverse;
+        }
+
         &--reverse {
             flex-direction: row-reverse;
+
+            @include media {
+                flex-direction: column-reverse;
+            }
+
         }
     }
 
     &__textarea {
-        padding: calc(60/18)+em calc(100/18)+em calc(60/18)+em  calc(60/18)+em;
+        padding: calc(60/18)+em calc(100/18)+em calc(60/18)+em calc(60/18)+em;
         width: 70%;
-        background: #23274F;
+        background: #cd5e3c;
         color: $sub-color;
-        @include flex(flex-start,center);
+        @include flex(flex-start, center);
         flex-direction: column;
-        &--red{
-            background: #740A00;
+
+        @include media {
+            width: 100%;
+        }
+
+        &--red {
+            background: #e9a62e;
         }
     }
 
     &__image {
         width: 30%;
+
+        @include media {
+            width: 100%;
+            height: 550px
+        }
 
         img {
             width: 100%;
@@ -247,7 +438,8 @@ a {
     }
 
     &__paragraph {
-        margin-bottom: calc(45/18)+em;
+        letter-spacing: .13em;
+        margin-bottom: calc(30/18)+em;
 
         &::after {
             content: "";
@@ -259,50 +451,628 @@ a {
             background: #fff;
         }
     }
-&__date{
-    width: fit-content;
-    @include rem(22);
-            font-family: "shippori-mincho", sans-serif;
-    margin:0 auto calc(20/24)+em;
-}
-    &__link {
-        margin-left: auto;
-        a {
-            display: block;
-            width: fit-content;
-            margin-left: auto;
-            color: #fff;
-            @include rem(14);
 
-            &::after {
-                content: "";
-                display: block;
-                width: 0;
-                height: 1px;
-                margin-top: (5/14)+em;
-                background: #fff;
-                transition: .3s;
+    &__date {
+        width: fit-content;
+        @include rem(22);
+        font-family: "shippori-mincho", sans-serif;
+        margin: 0 auto calc(20/24)+em;
+    }
+
+    @include button(#fff);
+}
+
+// history
+.history {
+    padding: calc(100/18)+em 0;
+
+    @include media {
+        padding-bottom: calc(50/18)+em;
+    }
+
+    &__inner {
+        @include inner();
+        background: url(../images/tanzaku.png) no-repeat top 0/35% auto;
+    }
+
+    &__textarea {
+        width: (490/1030)*100%;
+
+        @include media {
+            width: 100%;
+        }
+    }
+
+    &__title {
+        margin-bottom: (30/18)+em;
+    }
+
+    &__paragraph {
+        margin-bottom: calc(60/18)+em;
+    }
+
+    @include button();
+}
+
+// チンドン屋の想い
+.think {
+    padding-top: calc(134/18)+em;
+    padding-bottom: calc(184/18)+em;
+
+    @include media {
+        padding-bottom: 0;
+    }
+
+    &__content {
+        @include inner();
+        @include flex(center, center);
+        position: relative;
+
+        @include media {
+            justify-content: flex-start;
+        }
+    }
+
+    &__image {
+        width: calc(300/1030)*100%;
+
+        @include media {
+            margin-bottom: calc(32/18)+em;
+        }
+    }
+
+    &__textarea {
+        width: calc(580/1030)*100%;
+        margin-left: calc(30/18)+em;
+
+        @include media() {
+            width: 100%;
+            padding-right: 0;
+            margin-left: 0;
+        }
+    }
+
+    &__title {
+        font-weight: normal;
+        font-family: "shippori-mincho", sans-serif;
+        @include rem(30);
+        margin-bottom: calc(60/30)+em;
+
+        @include media() {
+            position: absolute;
+            top: 80px;
+            right: 0;
+        }
+    }
+
+    &__list {
+        flex: 1;
+        padding-left: 0;
+        margin: 0;
+
+        @include media {
+            padding-bottom: calc(60/18)+em;
+        }
+    }
+
+    &__item {
+        padding-bottom: calc(30/18)+em;
+        margin-bottom: calc(30/18)+em;
+        border-bottom: 1px solid #FF9553;
+    }
+}
+
+// Q&A
+.questions {
+    @include flex(stretch, flex-start);
+    margin-bottom: calc(120/18)+em;
+
+    @include media {
+        display: block;
+    }
+
+    &__title {
+        text-align: center;
+        padding: calc(40/18)+em calc(15/18)+em 0;
+        width: 20%;
+        border: 1px solid #707070;
+        border-left: transparent;
+        font-family: "shippori-mincho", sans-serif;
+        @include rem(30);
+        font-weight: normal;
+        letter-spacing: .13em;
+
+        @include media {
+            width: 100%;
+            border-top: transparent;
+            border-right: transparent;
+            padding: calc(35/18)+em 0;
+        }
+    }
+
+    &__list {
+        width: 80%;
+        padding: 0;
+        margin: 0;
+
+        @include media {
+            width: 100%;
+        }
+    }
+
+    &__item {
+        padding: calc(30/18)+em calc(60/18)+em calc(30/18)+em calc(30/18)+em;
+        @include flex(flex-start, space-between);
+        transition: .2s;
+        line-height: 1;
+        border-bottom: 1px solid #707070;
+
+        &:first-child {
+            border-top: 1px solid #707070;
+
+            @include media {
+                border-top: transparent;
+                align-items: center;
             }
 
-            &:hover {
-                &::after {
-                    width: 108%;
-                }
+        }
 
-                .detail__arrow {
-                    svg {
-                        transform: translateX(8px);
-                        transition: .3s;
-                    }
-                }
+        &:hover {
+            cursor: pointer;
+            background: #FFE1CE;
+        }
+
+        &.active {
+            background: #FFE1CE;
+        }
+    }
+
+    &__q {
+        span {
+            margin-right: calc(20/18)+em;
+        }
+    }
+
+    &__a {
+        height: 0;
+        opacity: 0;
+        transform: translateY(-1.25em);
+        transition: .3s;
+
+        span {
+            margin-right: calc(20/18)+em;
+        }
+
+        &.active {
+            height: auto;
+            transform: none;
+            opacity: 1;
+            margin-top: calc(30/18)+em;
+        }
+    }
+
+    &__button {
+        width: 25px;
+    }
+}
+
+.city {
+    &__title {
+        text-align: center;
+        padding: calc(40/18)+em 0;
+        @include rem(35);
+        letter-spacing: 0.2em;
+        font-weight: normal;
+        font-family: "shippori-mincho", sans-serif;
+        background: url(../images/city-title.png) no-repeat center center /cover;
+        margin-bottom: calc(40/18)+em;
+
+        @include media {
+            padding: calc(20/18)+em 0;
+        }
+    }
+
+    &__list {
+        padding: 0 calc(30/18)+em;
+        margin: 0;
+    }
+
+    &__item {
+        @include flex(center, center);
+        margin-bottom: calc(50/18)+em;
+
+        @include media {
+            display: block;
+        }
+
+        &--reverse {
+            flex-direction: row-reverse;
+
+            .city__images {
+                margin-left: calc(20/18)+em;
+                margin-right: 0;
+            }
+
+            .city__textarea {
+                margin-right: calc(20/18)+em;
+                margin-left: 0;
             }
         }
     }
 
-    &__arrow {
-        svg {
-            transition: .3s;
-            transform: none;
+    &__images {
+        width: (456/1030)*100%;
+        aspect-ratio: 456/385;
+        position: relative;
+        margin-right: calc(30/18)+em;
+
+        @include media {
+            width: 80%;
+            margin: auto;
+            margin-bottom: calc(20/18)+em;
         }
+    }
+
+    &__tower {
+        &-front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(318/456)*100%;
+        }
+
+        &-back {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: calc(217/456)*100%;
+        }
+    }
+
+    &__textarea {
+        width: calc(466/1030)*100%;
+        margin-left: calc(30/18)+em;
+
+        @include media {
+            width: 100%;
+        }
+    }
+
+    &__sub-title {
+        letter-spacing: .1em;
+        @include rem(25);
+        margin-bottom: calc(18/25)+em;
+    }
+
+    &__text {
+        letter-spacing: .1em;
+        line-height: 1.7;
+    }
+
+    &__cafe {
+        &-front {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: calc(318/456)*100%;
+        }
+
+        &-back {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: calc(217/456)*100%;
+        }
+    }
+}
+.dvisual {
+    width: 100%;
+    height: 50vh;
+    background: url(../images/IMGP9185.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding-right: calc(90/18)+em;
+    padding-top: calc(65/18)+em;
+
+    @include media {
+        height: 450px;
+        padding-right: calc(25/18)+em;
+        padding-top: calc(150/18)+em;
+    }
+
+    &__title {
+        color: $sub-color;
+        text-align: right;
+        font-weight: normal;
+        font-size: 40px;
+        letter-spacing: 0.2em;
+
+        @include media {
+            font-size: 30px;
+        }
+    }
+
+    &__text {
+        color: $sub-color;
+        text-align: right;
+        font-size: 20px;
+        padding-top: calc(40/18)+em;
+        letter-spacing: 0.2em;
+
+        @include media {
+            font-size: 18px;
+        }
+    }
+
+    &__cover {
+        margin-top: calc(200/18)+em;
+        padding-right: calc(30.5/18)+em;
+        border-right: solid 3px $sub-color;
+    }
+}
+
+.dhistory {
+    padding-left: calc(60/18)+em;
+    padding-right: calc(60/18)+em;
+    margin-bottom: calc(100/18)+em;
+
+
+    @include media {
+        padding-left: calc(20/18)+em;
+        padding-right: calc(20/18)+em;
+    }
+
+    &__item-text {
+        width: 65.43%;
+
+        @include media {
+            margin-right: 0;
+            width: 100%;
+        }
+    }
+
+    &__item-img {
+        width: 26.81%;
+
+        @include media {
+            width: 100%;
+            height: auto;
+            padding-left: calc(60/18)+em;
+            padding-right: calc(60/18)+em;
+            margin-top: calc(40/18)+em;
+        }
+
+    }
+
+    &__article {
+        display: flex;
+        justify-content: space-between;
+        margin-top: calc(100/18)+em;
+        letter-spacing: 0.1em;
+
+        @include media {
+            display: block;
+        }
+    }
+
+
+    &__article-reverse {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        margin-top: calc(100/18)+em;
+
+        @include media {
+            display: block;
+        }
+
+    }
+
+    &__dt {
+        font-size: 30px;
+        margin-top: calc(30/18)+em;
+        letter-spacing: 0.1em;
+
+        @include media {
+            font-size: 20px;
+        }
+    }
+
+    &__dd {
+        margin-top: calc(30/18)+em;
+        letter-spacing: 0.1em;
+    }
+
+
+    &__dl-text {
+        width: 80.80%;
+
+        @include media {
+            width: 100%;
+        }
+    }
+
+    &__title-all {
+        display: flex;
+        font-weight: normal;
+        line-height: 1.33;
+    }
+
+    &__title {
+        font-size: 50px;
+        margin-right: calc(10/18)+em;
+        font-weight: normal;
+
+        @include media {
+            font-size: 35px;
+        }
+
+    }
+
+    &__title-sub {
+        font-size: 25px;
+        padding-top: calc(27/18)+em;
+
+        @include media {
+            font-size: 18px;
+            padding-top: calc(20/18)+em;
+        }
+    }
+
+    &__img-text {
+        text-align: center;
+        margin-top: calc(20/18)+em;
+
+        @include media {
+            width: 89.74%;
+        }
+    }
+}
+
+//footer
+.footer {
+    background: $footer-color;
+    color: $sub-color;
+    margin-top: calc(100/18)+em;
+    margin-left: 250px;
+
+    @include media (1250px) {
+        margin-left: 0;
+    }
+
+
+    &__title {
+        padding-top: calc(50/18)+em;
+        font-size: 20px;
+        padding-bottom: calc(10.5/18)+em;
+        font-weight: normal;
+        width: 160px;
+        margin: 0 auto;
+        border-bottom: 3px double $sub-color;
+    }
+
+
+    &__flex {
+        @include inner();
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: calc(50/18)+em;
+        padding-top: calc(80/18)+em;
+
+        @include media {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    &__operation {
+        width: 30%;
+        text-align: center;
+        width: fit-content;
+
+        @include media {
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    &__text {
+        margin-top: calc(30.5/18)+em
+    }
+
+    &__copy {
+        text-align: center;
+        font-size: 14px;
+        margin-top: calc(100/18)+em;
+        padding-bottom: calc(50/18)+em;
+    }
+
+
+
+    &__dl {
+        margin-top: calc(140/18)+em;
+        letter-spacing: 0.2em;
+
+        @include media {
+            margin-top: calc(40/18)+em;
+            text-align: center;
+        }
+    }
+
+    &__dd {
+        margin-top: calc(20/18)+em;
+    }
+
+}
+
+.fNav {
+    width: 30%;
+
+    @include media {
+        width: 100%;
+    }
+
+    &__navigation {
+        padding-top: calc(50/18)+em;
+        margin: auto;
+    }
+
+    &__list {
+        text-orientation: upright;
+        writing-mode: vertical-rl;
+        list-style: none;
+        padding-top: 0;
+        margin: auto;
+
+        @include media {
+            writing-mode: horizontal-tb;
+            text-orientation: mixed;
+            padding-left: 0;
+
+        }
+    }
+
+
+
+
+    &__item {
+        margin-left: calc(30/18)+em;
+        margin-right: calc(30/18)+em;
+        font-weight: normal;
+
+        a {
+            color: $sub-color;
+            @include rem(14);
+        }
+
+        @include media {
+            margin: 0;
+            border-bottom: 1px solid $sub-color;
+            transition: .3s;
+
+            &:hover {
+                background: rgba(255, 255, 255, .3);
+            }
+
+            &:first-child {
+                border-top: 1px solid $sub-color;
+            }
+
+            a {
+                display: block;
+                padding: calc(15/14)+em calc(25/14)+em;
+                background: url(../images/yajirusi.png) no-repeat right 25px center/11px;
+            }
+        }
+    }
+
+    &__insta {
+        width: 30px;
+        margin: auto;
+        padding-top: calc(45/18)+em;
+
+
+
     }
 }
